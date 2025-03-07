@@ -1,4 +1,3 @@
-window.addEventListener("contextmenu", event => event.preventDefault());
 window.addEventListener("mouseup", () => isHeldDown = false);
 window.addEventListener("load", () => {
     addListeners();
@@ -6,9 +5,10 @@ window.addEventListener("load", () => {
 });
 
 const listenerConfig = [
-    [() => toggleEraser(), [["click", "eraser"], ["keyup", "Digit1"]]],
+    [() => toggleEraser(), [["mouseup", "eraser"], ["keyup", "Digit1"]]],
     [() => toggleRainbow(), [["click", "rainbow"], ["keyup", "Digit2"]]],
-    [() => changeGrid(), [["click", "settings"], ["keyup", "Digit3"]]]
+    [() => changeGrid(), [["click", "settings"], ["keyup", "Digit3"]]],
+    [() => resetGrid(), [["mousedown", "eraser"]]]
 ];
 
 function addListeners() {
@@ -77,6 +77,8 @@ function writeOnCell(event) {
 }
 
 function toggleEraser() {
+    eraserIsHeldDown = false;
+    clearTimeout(resetGridTimeout);
     if (rainbowIsToggled) toggleRainbow();
     eraserIsToggled = !eraserIsToggled;
     eraser.classList.toggle("invert");
@@ -102,4 +104,21 @@ function changeGrid() {
             break;
         }
     }
+}
+
+let eraserIsHeldDown = false;
+let resetGridTimeout;
+
+function resetGrid() {
+    if (eraserIsHeldDown) return;
+    eraserIsHeldDown = true;
+    resetGridTimeout = setTimeout(() => {
+        if (!confirm("Would you like to clear the sketchpad?")) {
+            return;
+        }
+        const cells = Array.from(output.childNodes);
+        cells.forEach(cell => {
+            cell.style.backgroundColor = "#e6e6e6";
+        });
+    }, 1000);
 }
