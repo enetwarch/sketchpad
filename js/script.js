@@ -97,7 +97,7 @@ function changeGrid() {
         input = parseInt(input);
         const inputIsNaN = isNaN(input);
         const inputIsWithinRange = input >= 1 && input <= 100;
-        if (inputIsNaN && !inputIsWithinRange) {
+        if (inputIsNaN || !inputIsWithinRange) {
             alert("Please input a number from 1 to 100.");
         } else {
             makeGrid(input);
