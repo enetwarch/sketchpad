@@ -44,19 +44,26 @@ body {
 
 .tablet #output {
     background-color: var(--white);
+    display: grid;
     grid-column: 1 / 4;
 }
 
 .tablet .input {
     align-items: center;
     background-color: var(--black-3);
-    border-radius: 100px;
+    border-radius: 1rem;
     color: var(--white);
     display: flex;
-    font-size: 2rem;
+    font-size: 3rem;
     justify-content: center;
+    transition: background-color 0.25s, color 0.25s;
 }
 
 .tablet .input:hover {
     cursor: pointer;
+}
+
+.tablet .invert.input {
+    background-color: var(--white);
+    color: var(--black-2);
 }
