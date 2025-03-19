@@ -1,3 +1,6 @@
+const millisecond = 1;
+const second = 1000 * millisecond;
+
 window.addEventListener("mouseup", () => isHeldDown = false);
 window.addEventListener("load", () => {
     addListeners();
@@ -38,6 +41,7 @@ function addListener(listener, func) {
 const output = document.getElementById("output");
 const eraser = document.getElementById("eraser");
 const rainbow = document.getElementById("rainbow");
+const settings = document.getElementById("settings");
 let isHeldDown = false;
 let eraserIsToggled = false;
 let rainbowIsToggled = false;
@@ -91,9 +95,13 @@ function toggleRainbow() {
 }
 
 function changeGrid() {
-    while (true) {
+    settings.classList.toggle("inverted");
+    setTimeout(() => {
         let input = prompt("Change grid size (1 to 100).");
-        if (input === null) break;
+        if (input === null) {
+            settings.classList.toggle("inverted");
+            return;
+        }
         input = parseInt(input);
         const inputIsNaN = isNaN(input);
         const inputIsWithinRange = input >= 1 && input <= 100;
@@ -101,9 +109,9 @@ function changeGrid() {
             alert("Please input a number from 1 to 100.");
         } else {
             makeGrid(input);
-            break;
         }
-    }
+        settings.classList.toggle("inverted");
+    }, 250 * millisecond);
 }
 
 let eraserIsHeldDown = false;
@@ -113,12 +121,17 @@ function resetGrid() {
     if (eraserIsHeldDown) return;
     eraserIsHeldDown = true;
     resetGridTimeout = setTimeout(() => {
-        if (!confirm("Would you like to clear the sketchpad?")) {
-            return;
-        }
+        if (!eraserIsToggled) toggleEraser();
+        setTimeout(resetCells, 250 * millisecond);
+    }, 1 * second);
+}
+
+function resetCells() {
+    if (confirm("Would you like to clear the sketchpad?")) {
         const cells = Array.from(output.childNodes);
         cells.forEach(cell => {
             cell.style.backgroundColor = "#e6e6e6";
         });
-    }, 1000);
+    }
+    toggleEraser();
 }
