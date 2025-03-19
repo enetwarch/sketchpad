@@ -1,13 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 :root {
-    --black-1: #1a1a1a;
-    --black-2: #333333;
-    --black-3: #4d4d4d;
     --blue: #608cab;
     --green: #72a079;
     --red: #bb4948;
-    --white: #e6e6e6;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+
+        --primary-1: hsl(0, 0%, 90%);
+        --primary-2: hsl(0, 0%, 80%);
+        --primary-3: hsl(0, 0%, 70%);
+        --secondary-1: hsl(0, 0%, 10%);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+
+        --primary-1: hsl(0, 0%, 10%);
+        --primary-2: hsl(0, 0%, 20%);
+        --primary-3: hsl(0, 0%, 30%);
+        --secondary-1: hsl(0, 0%, 90%);
+    }
 }
 
 * {
@@ -26,96 +42,51 @@ html {
 
 body {
     align-items: center;
-    background-color: var(--black-1);
+    background-color: var(--primary-1);
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-header {
-    color: var(--white);
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem clamp(1rem, 10vw, 10rem);
-    width: 100%;
-}
-
-header nav {
+.input {
     align-items: center;
-    display: flex;
-    gap: 1rem;
-}
-
-header nav .white {
-    color: var(--white);
-}
-
-header nav .red {
-    color: var(--red);
-}
-
-header nav .green {
-    color: var(--green);
-}
-
-header nav .blue {
-    color: var(--blue);
-}
-
-main {
-    align-items: center;
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    padding-block: 2rem;
-    width: 100vw;
-}
-
-main .tablet {
-    background-color: var(--black-2);
-    border-radius: 2rem;
-    display: grid;
-    gap: 1rem;
-    grid-template: 20rem 6rem / repeat(3, 6rem);
-    padding: 2rem;
-}
-
-main .tablet #output {
-    background-color: var(--white);
-    display: grid;
-    grid-column: 1 / 4;
-}
-
-main .tablet .input {
-    align-items: center;
-    background-color: var(--black-3);
+    background-color: var(--primary-2);
     border-radius: 1rem;
-    color: var(--white);
+    bottom: 2rem;
     display: flex;
-    font-size: 3rem;
+    font-size: 2rem;
+    gap: 1rem;
     justify-content: center;
-    transition: background-color 0.25s, color 0.25s;
+    padding: 1rem;
+    position: fixed;
 }
 
-main .tablet .input:hover {
+.input > * {
+    background-color: var(--primary-3);
+    border-radius: 1rem;
+    color: var(--secondary-1);
+    font-size: 2rem;
+    height: 4rem;
+    padding-top: 1rem;
+    text-align: center;
+    transition: background-color 0.25s, color 0.25s, opacity 0.25s;
+    width: 4rem;
+}
+
+.input > *:hover {
     cursor: pointer;
+    opacity: 0.8;
 }
 
-main .tablet .invert.input {
-    background-color: var(--white);
-    color: var(--black-2);
+.input > *.inverted {
+    background-color: var(--secondary-1);
+    color: var(--primary-1);
 }
 
-footer {
-    align-items: center;
-    color: var(--white);
-    display: flex;
-    justify-content: center;
-    padding: 1.5rem;
+#output {
+    background-color: var(--secondary-1);
+    height: 20rem;
+    width: 20rem;
+    display: grid;
 }

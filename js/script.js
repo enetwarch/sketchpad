@@ -81,13 +81,13 @@ function toggleEraser() {
     clearTimeout(resetGridTimeout);
     if (rainbowIsToggled) toggleRainbow();
     eraserIsToggled = !eraserIsToggled;
-    eraser.classList.toggle("invert");
+    eraser.classList.toggle("inverted");
 }
 
 function toggleRainbow() {
     if (eraserIsToggled) toggleEraser();
     rainbowIsToggled = !rainbowIsToggled;
-    rainbow.classList.toggle("invert");
+    rainbow.classList.toggle("inverted");
 }
 
 function changeGrid() {
