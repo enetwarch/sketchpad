@@ -9,12 +9,6 @@ A simple sketchpad website with simple functionality. This is a simple **JavaScr
 > [!WARNING]
 > This website does not support mobile touch events.
 
-### Tech Stack
-
-* **HTML5**: Structures the sketchpad.
-* **CSS3**: Designs the sketchpad.
-* **JavaScript**: Adds functionality to the sketchpad.
-
 ### Resources
 
 * **[Google Fonts](https://fonts.google.com/)**: Source of the [Varela Round](https://fonts.google.com/specimen/Varela+Round) font family which is used in this project.
