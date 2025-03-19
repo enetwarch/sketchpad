@@ -86,7 +86,7 @@ body {
 
 #output {
     background-color: var(--secondary-1);
+    display: grid;
     height: 20rem;
     width: 20rem;
-    display: grid;
 }

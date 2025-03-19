@@ -19,6 +19,7 @@ A simple sketchpad website with simple functionality. This is a simple **JavaScr
 
 * **[Google Fonts](https://fonts.google.com/)**: Source of the [Varela Round](https://fonts.google.com/specimen/Varela+Round) font family which is used in this project.
 * [**Font Awesome**](https://fontawesome.com/): Used for the UI icons.
-    * [Eraser](https://fontawesome.com/icons/eraser?s=solid)
-    * [Rainbow](https://fontawesome.com/icons/rainbow?s=solid)
-    * [Settings](https://fontawesome.com/icons/gear?s=solid)
+    * [Pencil](https://fontawesome.com/icons/pencil)
+    * [Eraser](https://fontawesome.com/icons/eraser)
+    * [Rainbow](https://fontawesome.com/icons/rainbow)
+    * [Settings](https://fontawesome.com/icons/gear)
