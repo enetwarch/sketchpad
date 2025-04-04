@@ -1,4 +1,4 @@
-# [Sketchpad](https://enetwarch.github.io/sketchpad/)
+# Sketchpad
 
 A simple sketchpad website with simple functionality. This is a simple **JavaScript exercise** from [The Odin Project Etch-a-Sketch Activity](https://www.theodinproject.com/lessons/foundations-etch-a-sketch). The sketchpad has the following features: 
 
@@ -16,3 +16,7 @@ A simple sketchpad website with simple functionality. This is a simple **JavaScr
     * [Eraser](https://fontawesome.com/icons/eraser)
     * [Rainbow](https://fontawesome.com/icons/rainbow)
     * [Settings](https://fontawesome.com/icons/gear)
+
+### License
+
+* [MIT License](LICENSE)
