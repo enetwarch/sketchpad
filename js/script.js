@@ -1,65 +1,41 @@
-const millisecond = 1;
-const second = 1000 * millisecond;
+window.addEventListener("load", () => makeGrid(16));
 
-window.addEventListener("mouseup", () => isHeldDown = false);
-window.addEventListener("load", () => {
-    addListeners();
-    makeGrid(16);
-});
+const eraserElement = document.getElementById("eraser");
+const rainbowElement = document.getElementById("rainbow");
+const settingsElement = document.getElementById("settings");
+const outputElement = document.getElementById("output");
 
-const listenerConfig = [
-    [() => toggleEraser(), [["mouseup", "eraser"], ["keyup", "Digit1"]]],
-    [() => toggleRainbow(), [["click", "rainbow"], ["keyup", "Digit2"]]],
-    [() => changeGrid(), [["click", "settings"], ["keyup", "Digit3"]]],
-    [() => resetGrid(), [["mousedown", "eraser"]]]
-];
+eraserElement.addEventListener("mousedown", resetGrid);
+eraserElement.addEventListener("mouseup", toggleEraser);
 
-function addListeners() {
-    listenerConfig.forEach(config => {
-        const func = config[0];
-        const listeners = config[1];
-        listeners.forEach(listener => {
-            addListener(listener, func);
-        });
-    }); 
-}
+rainbowElement.addEventListener("click", toggleRainbow);
+settingsElement.addEventListener("click", changeGrid);
 
-function addListener(listener, func) {
-    const eventType = listener[0];
-    if (eventType !== "keyup") {
-        const id = listener[1];
-        const element = document.getElementById(id);
-        element.addEventListener(eventType, func);
-    } else {
-        const eventCode = listener[1];
-        document.addEventListener(eventType, event => {
-            if (event.code === eventCode) func();
-        });
-    }
-}
+document.addEventListener("mouseup", () => isHeldDown = false);
+document.addEventListener("contextmenu", event => event.preventDefault());
 
-const output = document.getElementById("output");
-const eraser = document.getElementById("eraser");
-const rainbow = document.getElementById("rainbow");
-const settings = document.getElementById("settings");
 let isHeldDown = false;
 let eraserIsToggled = false;
 let rainbowIsToggled = false;
 
 function makeGrid(gridSize) {
-    output.innerHTML = "";
+    outputElement.innerHTML = "";
     const repeatSize = `repeat(${gridSize}, 1fr)`;
-    output.style.gridTemplate = `${repeatSize} / ${repeatSize}`;
+    outputElement.style.gridTemplate = `${repeatSize} / ${repeatSize}`;
+
     for (let i = 0; i < gridSize * gridSize; i++) {
         const div = document.createElement("div");
+
         div.addEventListener("mousedown", event => {
             isHeldDown = true;
             writeOnCell(event);
         });
+
         div.addEventListener("mouseover", event => {
             if (isHeldDown) writeOnCell(event);
         });
-        output.appendChild(div);
+
+        outputElement.appendChild(div);
     }
 }
 
@@ -83,35 +59,42 @@ function writeOnCell(event) {
 function toggleEraser() {
     eraserIsHeldDown = false;
     clearTimeout(resetGridTimeout);
+
     if (rainbowIsToggled) toggleRainbow();
     eraserIsToggled = !eraserIsToggled;
-    eraser.classList.toggle("inverted");
+
+    eraserElement.classList.toggle("inverted");
 }
 
 function toggleRainbow() {
     if (eraserIsToggled) toggleEraser();
+    
     rainbowIsToggled = !rainbowIsToggled;
-    rainbow.classList.toggle("inverted");
+    rainbowElement.classList.toggle("inverted");
 }
 
 function changeGrid() {
-    settings.classList.toggle("inverted");
+    settingsElement.classList.toggle("inverted");
+
     setTimeout(() => {
         let input = prompt("Change grid size (1 to 100).");
-        if (input === null) {
-            settings.classList.toggle("inverted");
+        if (!input) {
+            settingsElement.classList.toggle("inverted");
             return;
         }
+
         input = parseInt(input);
         const inputIsNaN = isNaN(input);
         const inputIsWithinRange = input >= 1 && input <= 100;
+
         if (inputIsNaN || !inputIsWithinRange) {
             alert("Please input a number from 1 to 100.");
         } else {
             makeGrid(input);
         }
-        settings.classList.toggle("inverted");
-    }, 250 * millisecond);
+
+        settingsElement.classList.toggle("inverted");
+    }, 250);
 }
 
 let eraserIsHeldDown = false;
@@ -120,18 +103,22 @@ let resetGridTimeout;
 function resetGrid() {
     if (eraserIsHeldDown) return;
     eraserIsHeldDown = true;
+
     resetGridTimeout = setTimeout(() => {
         if (!eraserIsToggled) toggleEraser();
-        setTimeout(resetCells, 250 * millisecond);
-    }, 1 * second);
+
+        setTimeout(resetCells, 250);
+    }, 1000);
 }
 
 function resetCells() {
     if (confirm("Would you like to clear the sketchpad?")) {
-        const cells = Array.from(output.childNodes);
+        const cells = Array.from(outputElement.childNodes);
+
         cells.forEach(cell => {
             cell.style.backgroundColor = "#e6e6e6";
         });
     }
+
     toggleEraser();
 }
