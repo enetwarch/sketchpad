@@ -32,10 +32,10 @@ body {
     min-height: 100vh;
 }
 
-.input {
+.input-container {
     align-items: center;
     background-color: var(--dark-2);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     bottom: 2rem;
     display: flex;
     font-size: 2rem;
@@ -45,9 +45,17 @@ body {
     position: fixed;
 }
 
-.input > * {
+@media (max-height: 700px) and (min-width: 700px) {
+    .input-container {
+        bottom: unset;
+        flex-direction: column;
+        right: 2rem;
+    }
+}
+
+.input-button {
     background-color: var(--dark-3);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     color: var(--light-1);
     font-size: 2rem;
     height: 4rem;
@@ -57,25 +65,60 @@ body {
     width: 4rem;
 }
 
-.input > *:hover {
-    cursor: pointer;
-    opacity: 0.8;
+.input-button:focus-visible {
+    outline: 2px solid var(--light-1);
 }
 
-.input > *.inverted {
+.input-button:hover {
+    cursor: pointer;
+}
+
+.input-button:active {
+    opacity: 0.9;
+}
+
+.input-button.inverted {
     background-color: var(--light-1);
     color: var(--dark-1);
 }
 
-#output {
+.sketchpad {
+    background-color: var(--dark-2);
+    border-radius: 0.5rem;
+    padding: 2rem;
+}
+
+.output {
     background-color: var(--light-1);
     display: grid;
     height: 20rem;
     width: 20rem;
 }
 
-@media only screen and (max-width: 800px) {
-    html {
-        font-size: 12px;
+@media only screen and (max-width: 500px) {
+    .output {
+        height: 18rem;
+        width: 18rem;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .output {
+        height: 16rem;
+        width: 16rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .output {
+        height: 14rem;
+        width: 14rem;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .output {
+        height: 12rem;
+        width: 12rem;
     }
 }
